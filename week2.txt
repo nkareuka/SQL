@@ -1,0 +1,55 @@
+Задание: 7 
+Найдите номера моделей и цены всех имеющихся в продаже продуктов (любого типа) производителя B (латинская буква).
+
+Решение:
+SELECT pc.model, pc.price
+FROM pc
+JOIN product
+ON product.model=pc.model
+WHERE maker='B'
+UNION
+SELECT laptop.model, laptop.price
+FROM laptop
+JOIN product
+ON product.model=laptop.model
+WHERE maker='B'
+UNION
+SELECT printer.model, printer.price
+FROM printer
+JOIN product
+ON product.model=printer.model
+WHERE maker='B'
+
+
+Задание: 8 
+Найдите производителя, выпускающего ПК, но не ПК-блокноты.
+
+Решение:
+SELECT DISTINCT maker 
+FROM product
+WHERE type='pc'
+AND maker NOT IN 
+(SELECT maker 
+FROM product
+WHERE type='laptop')
+
+
+Задание: 9
+Найдите производителей ПК с процессором не менее 450 Мгц. Вывести: Maker
+
+Решение:
+SELECT DISTINCT maker
+FROM product
+JOIN pc
+ON product.model=pc.model
+WHERE speed>=450
+
+
+Задание: 10
+Найдите модели принтеров, имеющих самую высокую цену. Вывести: model, price
+
+Решение:
+SELECT model, price
+FROM printer
+WHERE price = (SELECT MAX (price)
+FROM printer)
