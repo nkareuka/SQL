@@ -33,6 +33,16 @@ AND maker NOT IN
 FROM product
 WHERE type='laptop')
 
+или
+
+select maker
+from product
+where type='pc'
+except
+select maker
+from product
+where type='laptop'
+ 
 
 Задание: 9
 Найдите производителей ПК с процессором не менее 450 Мгц. Вывести: Maker
@@ -53,3 +63,5 @@ SELECT model, price
 FROM printer
 WHERE price = (SELECT MAX (price)
 FROM printer)
+
+
